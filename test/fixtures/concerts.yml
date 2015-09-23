@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  position: MyString
+  band_id: 
+  location: MyString
+
+two:
+  position: MyString
+  band_id: 
+  location: MyString
