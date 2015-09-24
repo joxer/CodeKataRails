@@ -20,27 +20,43 @@ class ConcertsController < ApplicationController
 
 
   def create
-    @concert = Concert.new(concert_params)
-    if @concert.save
-      render json: { status: :created }
+
+    if @user != nil
+      @concert = Concert.new(concert_params)
+      @concert.user = @user
+      @concert.band = Band.find(params[:band_id])
+      
+      if @concert.save
+        render json: { status: :created }
+      else
+        render json:  {  errors: @concert.errors }
+      end
+      
     else
-      #format.html { render :new }
-      render json:  {  errors: @concert.errors }
+      render json: failed_user_json
     end
   end
-
+  
   def update
+    
+    if @user.isAdmin? ||  @concert.user == @user
       if @concert.update(concert_params)
-        render json: {status: updated}
+        render json: {status: :updated}
       else
         render json: {errors: @concert.errors, status: :unprocessable_entity }
       end
+    else
+      render json: failed_user_json
     end
   end
-
+  
   def destroy
-    @concert.destroy
-    json { status :destroyed }
+    if @user.isAdmin? ||  @concert.user == @user
+      @concert.destroy
+      render json: { status: :destroyed }
+    else
+      render json: failed_user_json
+    end
     
   end
 

@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
 private
 
   def login_user
-    @user = User.where(:email => user_params[:email], :password => user_params[:password]).first
-    unless @user.valid? 
+    @user = User.where(:email => user_params[:email], :password => Digest::MD5.hexdigest(user_params[:password])).first
+    if @user == nil
       render :json => { :error => "user not exists" }
     end
   end
@@ -16,5 +16,12 @@ private
    params.require(:user).permit(:email, :password)
  end
 
+private
+ def failed_user_json
+   {status: :error, errors: "User is not owner or does not exists"}
+ end
 
+ def failed_user_not_admin_json
+   {status: :error, errors: "You can't access this"}
+ end
 end
