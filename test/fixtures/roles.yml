@@ -1,7 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  role: MyString
+admin:
+  id: 1
+  role: admin
 
-two:
-  role: MyString
+user:
+  id: 2
+  role: user
+
+guest:
+  id: 3
+  role: guest

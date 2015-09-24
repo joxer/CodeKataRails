@@ -1,5 +1,5 @@
 class UserActionController < ApplicationController
-
+  before_filter :login_user, :only => [:create_concert]
 
   def create
     user = User.new(user_params)
@@ -13,19 +13,12 @@ class UserActionController < ApplicationController
 
 
   def login
-    session[:user] = nil
-    user = User.where(:email => user_params[:email], :password => user_params[:password]).first
-
-    if user != nil
-      render :json => { :user => user}
+    if  login_user
+      render :json => { :status => true, :message => "logged in"}
     else
-      render :json => { :error => "user is nil" }
+      render :json => { :error => "user not exists" }
     end
   end
 
- private
 
- def user_params
-   params.require(:user).permit(:email, :password)
- end
 end
