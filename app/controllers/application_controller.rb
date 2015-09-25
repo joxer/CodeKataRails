@@ -3,7 +3,20 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
 #  protect_from_forgery with: :exception
 
+  unless Rails.application.config.consider_all_requests_local
+    #rescue_from Exception, with: lambda { |exception| render_error 500, exception }
+    rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
+  end
+  
+
 private
+
+  def render_error(status, exception)
+    render json: {errors: "request not found" }
+  end
+  
+
+
 
   def login_user
     @user = User.where(:email => user_params[:email], :password => Digest::MD5.hexdigest(user_params[:password])).first

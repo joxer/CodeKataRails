@@ -1,10 +1,10 @@
 class BandsController < ApplicationController
   before_action :set_band, only: [:show, :edit, :update, :destroy]
-  before_filter :login_user, :only: [:create, :update, :destroy,:new]
+  before_filter :login_user, only: [:create, :update, :destroy, :new]
 
   def index
     @bands = Band.all
-    render json: @bands
+    render json: @bands.pretty_json
   end
 
   def show
@@ -22,7 +22,7 @@ class BandsController < ApplicationController
       @band = Band.new(band_params)
 
       if @band.save
-        render json: { status: :created }
+        render json: { status: :created, band: => @band.pretty_json }
       else
         render json: {errors: @band.errors, status: :unprocessable_entity }
       end
@@ -34,7 +34,7 @@ class BandsController < ApplicationController
   def update
     if @user.isAdmin?
       if @band.update(band_params)
-        render json: { status: :updated }
+        render json: { status: :updated, band: => @band.pretty_json }
       else
         render json: { errors: @band.errors, status: :unprocessable_entity }
       end

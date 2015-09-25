@@ -4,11 +4,11 @@ class ConcertsController < ApplicationController
 
   def index
     @concerts = Concert.all
-    render json: @concerts
+    render json: @concerts.to_json(:only => [:id, :position,:location])
   end
 
   def show
-    render json: @concert
+    render json: @concert.pretty_json
   end
 
   def new
@@ -27,7 +27,7 @@ class ConcertsController < ApplicationController
       @concert.band = Band.find(params[:band_id])
       
       if @concert.save
-        render json: { status: :created }
+        render json: { status: :created, concert: @concert.pretty_json }
       else
         render json:  {  errors: @concert.errors }
       end
@@ -41,7 +41,7 @@ class ConcertsController < ApplicationController
     
     if @user.isAdmin? ||  @concert.user == @user
       if @concert.update(concert_params)
-        render json: {status: :updated}
+        render json: {status: :updated, concert: @concert.pretty_json}
       else
         render json: {errors: @concert.errors, status: :unprocessable_entity }
       end
