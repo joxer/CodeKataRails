@@ -16,6 +16,7 @@ class UserActionController < ApplicationController
 
   def login
     if  login_user
+      session[:user] = @user
       render :json => { :status => true, :message => "logged in"}
     else
       render :json => { :error => "user not exists" }

@@ -20,27 +20,34 @@ private
 
   def login_user
     if @user == nil
-      @user = User.where(:email => user_params[:email], :password => Digest::MD5.hexdigest(user_params[:password])).first
-      if @user == nil
-        @user_token = UserToken.where("token = ? AND start_date >= ? AND end_date >= ?", user_params[:token], user_params[:start_date], user_params[:end_date])
-        if @user_token == []
-          render :json => { :error => "user not exists" }
+      
+      if session[:user] == nil
+        
+        @user = User.where(:email => user_params[:email], :password => Digest::MD5.hexdigest(user_params[:password])).first
+        if @user == nil
+          @user_token = UserToken.where("token = ? AND start_date >= ? AND end_date >= ?", user_params[:token], user_params[:start_date], user_params[:end_date])
+          if @user_token == []
+            render :json => { :error => "user not exists" }
+          else
+            @user = @user_token.user
+            @user
+          end
         else
-          @user = @user_token.user
           @user
         end
       else
         @user
       end
     else
+      @user = session[:user]
       @user
     end
   end
-
- def user_params
-   params.require(:user).permit(:email, :password, :user_token)
- end
-
+  
+  def user_params
+    params.require(:user).permit(:email, :password, :user_token)
+  end
+  
 private
  def failed_user_json
    {status: :error, errors: "User is not owner or does not exists"}

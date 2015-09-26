@@ -46,3 +46,4 @@ end
 
 # user gems
 
+gem 'requirejs-rails'
