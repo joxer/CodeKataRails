@@ -16,16 +16,19 @@
     <% @concerts.each do |concert| %>
       <tr>
         <td><%= concert.position %></td>
-        <td><%= concert.band %></td>
+        <td><%= concert.band.name %></td>
         <td><%= concert.location %></td>
-        <td><%= link_to 'Show', concert %></td>
-        <td><%= link_to 'Edit', edit_concert_path(concert) %></td>
-        <td><%= link_to 'Destroy', concert, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', band_concert_path(:band_id => concert.band.id, :id => concert.id) %></td>
+	<% if @user != nil && (@user.isAdmin? || concert.user == @user) %>
+        <td><%= link_to 'Edit', edit_band_concert_path(:band_id => concert.band.id, :id => concert.id) %></td>
+        <td><%= link_to 'Destroy', band_concert_path(:id => concert.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <% end %>
+      <% end %>
+      <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Concert', new_concert_path %>
+<% if @user != nil && (@user.isAdmin? || concert.user == @user) %>
+<%= link_to 'New Concert', new_band_concert_path %>
+<% end %>

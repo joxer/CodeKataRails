@@ -16,14 +16,17 @@
       <tr>
         <td><%= band.name %></td>
         <td><%= band.description %></td>
-        <td><%= link_to 'Show', band %></td>
+        <td><%=  link_to 'Show', band %></td>
+	<% if @user != nil && (@user.isAdmin? || concert.user == @user) %>
         <td><%= link_to 'Edit', edit_band_path(band) %></td>
         <td><%= link_to 'Destroy', band, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
+<% if @user != nil && (@user.isAdmin? || concert.user == @user) %>
 <%= link_to 'New Band', new_band_path %>
+<% end %>

@@ -3,6 +3,8 @@ require 'test_helper'
 class BandsControllerTest < ActionController::TestCase
   setup do
     @band = bands(:one)
+    @user = User.first
+    params = ActionController::Parameters.new({user: {}})
   end
 
   test "should get index" do
@@ -18,7 +20,7 @@ class BandsControllerTest < ActionController::TestCase
 
   test "should create band" do
     assert_difference('Band.count') do
-      post :create, band: { description: @band.description, name: @band.name }
+      post :create, user: { email: 'admin@admin.it', password: 'adminpassword' }, band: { description: @band.description, name: @band.name }
     end
 
     assert_redirected_to band_path(assigns(:band))
@@ -30,18 +32,18 @@ class BandsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, id: @band
+    get :edit, id: @band, user: { email: 'admin@admin.it', password: 'adminpassword' }
     assert_response :success
   end
 
   test "should update band" do
-    patch :update, id: @band, band: { description: @band.description, name: @band.name }
+    patch :update, id: @band, user: { email: 'admin@admin.it', password: 'adminpassword' }, band: { description: @band.description, name: @band.name }
     assert_redirected_to band_path(assigns(:band))
   end
 
   test "should destroy band" do
     assert_difference('Band.count', -1) do
-      delete :destroy, id: @band
+      delete :destroy, user: { email: 'admin@admin.it', password: 'adminpassword' }, id: @band
     end
 
     assert_redirected_to bands_path

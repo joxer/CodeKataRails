@@ -19,14 +19,26 @@ private
 
 
   def login_user
-    @user = User.where(:email => user_params[:email], :password => Digest::MD5.hexdigest(user_params[:password])).first
     if @user == nil
-      render :json => { :error => "user not exists" }
+      @user = User.where(:email => user_params[:email], :password => Digest::MD5.hexdigest(user_params[:password])).first
+      if @user == nil
+        @user_token = UserToken.where("token = ? AND start_date >= ? AND end_date >= ?", user_params[:token], user_params[:start_date], user_params[:end_date])
+        if @user_token == []
+          render :json => { :error => "user not exists" }
+        else
+          @user = @user_token.user
+          @user
+        end
+      else
+        @user
+      end
+    else
+      @user
     end
   end
 
  def user_params
-   params.require(:user).permit(:email, :password)
+   params.require(:user).permit(:email, :password, :user_token)
  end
 
 private

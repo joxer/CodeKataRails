@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   belongs_to :role
   has_many :concerts
-
+  has_many :user_tokens
   validates :password, presence: true
 
   def isAdmin?
@@ -15,4 +15,6 @@ class User < ActiveRecord::Base
   def isGuest?
     role.role == nil || role.role == "guest"
   end
+
+    
 end

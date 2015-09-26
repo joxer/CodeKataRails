@@ -22,5 +22,13 @@ class UserActionController < ApplicationController
     end
   end
 
+  def create_user_token
+    if login_user
+      render :json => { :status => true, :user_token => UserToken.generate_user_token(@user) }
+    else
+      render :json => { :error => "user not exists" }
+    end
+  end
+
 
 end

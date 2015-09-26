@@ -3,12 +3,17 @@ class ConcertsController < ApplicationController
   before_filter :login_user, only: [:create, :update, :destroy, :new]
 
   def index
-    @concerts = Concert.all
-    render json: @concerts.to_json(:only => [:id, :position,:location])
+    @concerts = Concert.where(band_id: params[:band_id])
+    respond_to do |format|
+      format.json #{ render json: @concerts.to_json(:only => [:id, :position,:location])}
+      format.html 
+    end
   end
 
   def show
-    render json: @concert.pretty_json
+    respond_to do |format|
+      format.json
+    end
   end
 
   def new
@@ -27,9 +32,16 @@ class ConcertsController < ApplicationController
       @concert.band = Band.find(params[:band_id])
       
       if @concert.save
-        render json: { status: :created, concert: @concert.pretty_json }
+        respond_to do |format|
+          format.json { render json: { status: :created, concert: @concert.pretty_json }}
+          format.html
+        end
+          
       else
-        render json:  {  errors: @concert.errors }
+        respond_to do |format|
+          render json:  {  errors: @concert.errors }
+          render html
+        end
       end
       
     else
@@ -41,9 +53,15 @@ class ConcertsController < ApplicationController
     
     if @user.isAdmin? ||  @concert.user == @user
       if @concert.update(concert_params)
-        render json: {status: :updated, concert: @concert.pretty_json}
+        respond_to do |format|
+          format.json { render json: {status: :updated, concert: @concert.pretty_json} }
+          format.html
+        end
       else
-        render json: {errors: @concert.errors, status: :unprocessable_entity }
+        respond_to do |format|
+          format.json { render json: {errors: @concert.errors, status: :unprocessable_entity } }
+          format.html
+        end
       end
     else
       render json: failed_user_json
@@ -57,7 +75,6 @@ class ConcertsController < ApplicationController
     else
       render json: failed_user_json
     end
-    
   end
 
   private
