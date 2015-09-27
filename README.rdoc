@@ -1,28 +1,39 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+CodeKata is an example of doing a server in rails to serve API.
+Api are made to login person and to ask for bands and concerts. The api system is really really simple
 
-Things you may want to cover:
+The project is made with rails 4 and ruby 2.2.1
+To install the project just do a bundle update and migrate the files. Then start the server.
+There are some fixtures that can be loaded about concerts and bands and also the admin user
+For time issues i haven't covered the specs and test. I should do it soon.
 
-* Ruby version
+There is a frontend for login very simple made with Chaplin JS. I have to improve it to permit more features.
 
-* System dependencies
+the routes are very simple:
 
-* Configuration
+URI     Pattern                                 Controller#Action
+GET    /bands/:band_id/concerts(.:format)          concerts#index
+POST   /bands/:band_id/concerts(.:format)          concerts#create
+GET    /bands/:band_id/concerts/new(.:format)      concerts#new
+GET    /bands/:band_id/concerts/:id/edit(.:format) concerts#edit
+GET    /bands/:band_id/concerts/:id(.:format)      concerts#show
+PATCH  /bands/:band_id/concerts/:id(.:format)      concerts#update
+PUT    /bands/:band_id/concerts/:id(.:format)      concerts#update
+DELETE /bands/:band_id/concerts/:id(.:format)      concerts#destroy
+GET    /bands(.:format)                            bands#index
+POST   /bands(.:format)                            bands#create
+GET    /bands/new(.:format)                        bands#new
+GET    /bands/:id/edit(.:format)                   bands#edit
+GET    /bands/:id(.:format)                        bands#show
+PATCH  /bands/:id(.:format)                        bands#update
+PUT    /bands/:id(.:format)                        bands#update
+DELETE /bands/:id(.:format)                        bands#destroy
+POST   /user/create(.:format)                      user_action#create
+POST   /user/login(.:format)                       user_action#login
+POST   /user/token(.:format)                       user_action#create_user_token
+GET    /login(.:format)                            main_home#index
+GET    /                                           main_home#index
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Where format is html or json, it depends of content-type requested in the headers

@@ -1,11 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  position: MyString
-  band_id: 
-  location: MyString
+  position: (12.62,45.25)
+  band_id: 1
+  location: Great new Park Avenue
 
 two:
-  position: MyString
-  band_id: 
-  location: MyString
+  position: (37.4,19.43)
+  band_id:  3
+  location: Somewhere in the World
+
+three:
+  position: (47.4,29.43)
+  band_id:  2
+  location: Europe i guess
+	
