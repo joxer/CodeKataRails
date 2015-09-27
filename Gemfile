@@ -47,3 +47,4 @@ end
 # user gems
 
 gem 'requirejs-rails'
+gem 'rename'

@@ -5,7 +5,5 @@ define(function() {
   // `match` is match method of the Router
   return function(match) {
       match('login', 'login#show');
-      match('bands', 'band#show');
-      match('concerts', 'concert#show');
   };
 });

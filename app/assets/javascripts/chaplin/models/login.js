@@ -9,10 +9,6 @@ define([
 	
     }
 
-    // ,initialize: function(attributes, options) {
-    //  Model.prototype.initialize.apply(this, arguments);
-    //  console.debug('HelloWorld#initialize');
-    // }
   });
 
   return Login;

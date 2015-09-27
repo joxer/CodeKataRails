@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post 'user/create' => 'user_action#create'
   post 'user/login' => 'user_action#login'
   post 'user/token' => 'user_action#create_user_token'
+  get  'login' => "main_home#index"
   root "main_home#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

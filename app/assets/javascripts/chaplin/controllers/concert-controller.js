@@ -8,7 +8,6 @@ define([
   var ConcertController = Controller.extend({
       show: function(params) {
 
-	  alert(1)
 	  this.view = new ConcertView({
 	      
 	  });

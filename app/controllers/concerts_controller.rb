@@ -1,9 +1,14 @@
 class ConcertsController < ApplicationController
   before_action :set_concert, only: [:show, :edit, :update, :destroy]
-  before_filter :login_user, only: [:create, :update, :destroy, :new]
+  before_filter :login_user, only: [:create, :update, :destroy, :new, :index]
 
   def index
-    @concerts = Concert.where(band_id: params[:band_id])
+
+    if params[:band_id] == "0"
+      @concerts = Concert.all
+    else    
+      @concerts = Concert.where(band_id: params[:band_id])
+    end
     respond_to do |format|
       format.json #{ render json: @concerts.to_json(:only => [:id, :position,:location])}
       format.html 

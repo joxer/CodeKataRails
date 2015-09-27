@@ -1,8 +1,9 @@
 class BandsController < ApplicationController
   before_action :set_band, only: [:show, :edit, :update, :destroy]
-  before_filter :login_user, only: [:create, :update, :destroy]
+  before_filter :login_user, only: [:index, :create, :update, :destroy]
 
   def index
+
     @bands = Band.all
     respond_to do |format|
       format.json # { render json: @bands.to_json(:only => [:id, :name, :description])}

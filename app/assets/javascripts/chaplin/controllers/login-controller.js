@@ -1,3 +1,4 @@
+
 define([
   'controllers/base/controller',
   'models/login',
@@ -8,14 +9,16 @@ define([
 
     var LoginController = Controller.extend({
 
-	initialize: function(){
-	    Controller.user = new User();
-	},
+      initialize: function(){
+	  Controller.user = new User();
+	  $("#login-button").on("click",this.show);
+      },
 	
-      show: function(params) {
-	  this.view = new LoginView(
-	      Controller.user
-	  );
+	show: function(params) {
+	    this.view = new LoginView(
+		Controller.user
+	    );
+	    this.view.show();
     }
   });
 

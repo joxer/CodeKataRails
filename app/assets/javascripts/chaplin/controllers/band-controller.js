@@ -8,15 +8,13 @@ define([
 
   var BandController = Controller.extend({
       show: function(params) {
-	  var bands = new Bands();
+	  this.bands = new Bands();
 
-	  bands.fetch().success(function(data){
-	      console.log(data)
+	  this.bands.fetch().success(function(data){
+	      this.view = new BandView(this.bands);
 	  })
-	  
-	  this.view = new BandView({
-	      
-	  });
+
+
     }
   });
 
