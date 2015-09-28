@@ -1969,7 +1969,20 @@ width:200px !important;
 }
 
 .login-container {
-
     margin-top: 40px;
+}
+
+.band {
+
+    background-color: #ffddff;
+    padding:20px;
+    min-height:200px;
+    margin-top:20px;
+    margin-bottom.20px;
+}
+
+.band div.image{
+
+    
 
 }
