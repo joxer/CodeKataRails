@@ -22,7 +22,7 @@ class BandsController < ApplicationController
   end
 
   def create
-    if @user.isAdmin?
+    if @user != nil && @user.isAdmin?
       @band = Band.new(band_params)
 
       if @band.save
@@ -45,7 +45,7 @@ class BandsController < ApplicationController
   end
 
   def update
-    if @user.isAdmin?
+    if @user != nil && @user.isAdmin?
       if @band.update(band_params)
         respond_to do |format|
           format.json {render json: { status: :updated, band:  @band.pretty_json }}
@@ -65,7 +65,7 @@ class BandsController < ApplicationController
   end
 
   def destroy
-    if @user.isAdmin?
+    if  @user != nil && @user.isAdmin?
       @band.destroy
       respond_to do |format|
         format.json { render json: { status: :destroyed }}
@@ -79,7 +79,15 @@ class BandsController < ApplicationController
 
   private
     def set_band
-      @band = Band.find(params[:id])
+      begin
+        @band = Band.find(params[:id])
+      rescue
+        respond_to do |format|
+          format.json {render json: {errors: "Band doesn't exist"}}
+        end
+      end
+
+
     end
 
     def band_params

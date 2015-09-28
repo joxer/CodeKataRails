@@ -13,13 +13,24 @@ class UserActionController < ApplicationController
     end
   end
 
+  def login_page
+    if login_user
+      redirect_to "/"
+    end
+  end
 
   def login
-    if  login_user
+    if login_user
       session[:user] = @user
-      render :json => { :status => true, :message => "logged in"}
+      respond_to do |format|
+        format.json {render json:  { :status => true, :message => "logged in"}}
+        format.html {redirect_to "/"}
+      end
     else
-      render :json => { :error => "user not exists" }
+      respond_to do |format|
+        format.json {render json:  { :error => "user not exists" }}
+        format.html {redirect_to :login_page }
+      end
     end
   end
 

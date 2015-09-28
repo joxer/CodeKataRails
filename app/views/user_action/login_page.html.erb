@@ -1,0 +1,34 @@
+<div class="container login-container">
+
+
+<%= form_tag '/user/login', method: 'post', :class => "form-horizontal" do %>
+
+<div>
+<span class="col-sm-1">
+</span>
+<h3 class="col-sm-11" >
+Insert your login details
+
+</h3>
+
+</div>
+<div class="form-group">
+<%= label_tag("user[email]", "Email", :class => "col-sm-2 control-label") %>
+    <div class="col-sm-10">
+<%= text_field_tag("user[email]", "", :class => "form-control  input-login")%>
+    </div>
+</div>
+<div class="form-group">
+  <%= label_tag("user[password]", "password", :class => "col-sm-2 control-label") %>
+  <div class="col-sm-10">
+    <%= text_field_tag("user[password]", "",:class => "form-control  input-login")%>
+  </div>
+</div>
+<div class="form-group">
+  <span class="col-sm-2 control-label" ></span>
+<div class="col-sm-10">
+<%= submit_tag("Send", :class => "btn btn-default col-sm-2 input-login") %>
+</div>
+</div>
+<% end %> 
+</div>

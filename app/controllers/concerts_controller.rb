@@ -38,7 +38,7 @@ class ConcertsController < ApplicationController
       
       if @concert.save
         respond_to do |format|
-          format.json { render json: { status: :created, concert: @concert.pretty_json }}
+          format.json
           format.html
         end
           
@@ -56,7 +56,7 @@ class ConcertsController < ApplicationController
   
   def update
     
-    if @user.isAdmin? ||  @concert.user == @user
+    if @user != nil && (@user.isAdmin? ||  @concert.user == @user)
       if @concert.update(concert_params)
         respond_to do |format|
           format.json { render json: {status: :updated, concert: @concert.pretty_json} }
@@ -74,7 +74,7 @@ class ConcertsController < ApplicationController
   end
   
   def destroy
-    if @user.isAdmin? ||  @concert.user == @user
+    if @user != nil && (@user.isAdmin? ||  @concert.user == @user)
       @concert.destroy
       render json: { status: :destroyed }
     else
@@ -84,7 +84,13 @@ class ConcertsController < ApplicationController
 
   private
     def set_concert
-      @concert = Concert.find(params[:id])
+      begin
+        @concert = Concert.find(params[:id])
+      rescue
+        respond_to do |format|
+          format.json {render json: {errors: "Concert doesn't exist"}}
+        end
+      end
     end
 
     def concert_params

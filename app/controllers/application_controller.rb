@@ -26,7 +26,7 @@ private
           if @user == nil
             @user_token = UserToken.where("token = ? AND start_date >= ? AND end_date >= ?", user_params[:token], user_params[:start_date], user_params[:end_date])
             if @user_token == []
-              render :json => { :error => "user not exists" }
+              return false
             else
               @user = @user_token.user
               @user
