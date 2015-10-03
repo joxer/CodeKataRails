@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-
   resources :bands do
     resources :concerts
   end	
@@ -10,6 +8,7 @@ Rails.application.routes.draw do
   post 'user/login' => 'user_action#login'
   post 'user/token' => 'user_action#create_user_token'
   get  'user/login' => 'user_action#login_page'
+  get  'user/logout' => 'user_action#logout'
   get  'login' => "main_home#index"
   root "main_home#index"
   # The priority is based upon order of creation: first created -> highest priority.

@@ -17,6 +17,7 @@ define([
 	
 	show: function(){
 	    var self = this;
+
 	    $( "#dialog" ).dialog({ modal: true,
 				    
 				    close: function(){
@@ -28,6 +29,7 @@ define([
 					    if(data.status == true){
 						self.user.set("status",true);
 						alert("ok logged in!")
+						location.reload()
 					    }
 					    else{
 						alert("failed logging in!")

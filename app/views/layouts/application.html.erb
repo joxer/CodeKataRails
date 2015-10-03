@@ -50,7 +50,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<span class="menu"> <img src="images/icon.png" alt=""/></span>
 					<ul class="res">
 					  <li><a href="/" class="active"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span></a></li>
-					  <li><a href="/login"  >Login</a></li> 
+					  <% if session[:user] == nil %>
+					  <li><a href="/login" id="login-button" >Login</a></li>
+					  <% else %>
+					  <li><a href="/user/logout" id="logout-button" >Logout</a></li>
+					  <% end %>
 						<li><a href="/bands">Bands</a></li> 
 					  <li class="nav-line"><a href="/bands/0/concerts">Concerts</a></li> 
 				   </ul>

@@ -12,7 +12,7 @@
       <div class="concert-info">
 	<div class="concert-location">
 	  <% if params[:band_id] == "0" %>
-	  <h1><%= concert.band.name %> | <%= concert.location %></h1>
+	  <h1><%= link_to concert.band.name, concert.band %> | <%= concert.location %></h1>
 	  <% else %>
 	  <h1><%= concert.location %></h1>
 	  <% end %>

@@ -24,7 +24,7 @@
 	  <% else %>
 	   <h4>Sorry no concert for now</h4>
 	  <% end %>
-	  <% if @user != nil && @user.isAdmin? %>
+	  <% if @user != nil %>
 	  
 	  <%= link_to 'Open a new Concert', new_band_concert_path(band) %>
 	  

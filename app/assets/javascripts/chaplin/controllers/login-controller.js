@@ -12,9 +12,11 @@ define([
       initialize: function(){
 	  Controller.user = new User();
 	  $("#login-button").on("click",this.show);
+
       },
 	
 	show: function(params) {
+
 	    this.view = new LoginView(
 		Controller.user
 	    );

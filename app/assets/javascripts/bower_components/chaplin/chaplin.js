@@ -2419,12 +2419,12 @@ module.exports = Router = (function() {
     }
     if (handler) {
       _.defaults(options, {
-        changeURL: true
+          changeURL: false
       });
       handler.callback(path || params, options);
       return true;
     } else {
-      throw new Error('Router#route: request was not routed');
+	throw new Error('Router#route: request was not routed');
     }
   };
 

@@ -11,8 +11,6 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require turbolinks
 //= require bower_components/requirejs/require.js
 
   // Configure the AMD module loader
