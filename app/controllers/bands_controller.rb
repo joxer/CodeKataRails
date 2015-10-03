@@ -49,7 +49,8 @@ class BandsController < ApplicationController
       if @band.update(band_params)
         respond_to do |format|
           format.json {render json: { status: :updated, band:  @band.pretty_json }}
-          format.html
+          format.html {redirect_to bands_path}
+
         end
       else
         respond_to do |format|
@@ -66,13 +67,17 @@ class BandsController < ApplicationController
 
   def destroy
     if  @user != nil && @user.isAdmin?
+      @band.concerts.each {|concert| concert.destroy }
       @band.destroy
+      
       respond_to do |format|
         format.json { render json: { status: :destroyed }}
+        format.html {redirect_to bands_path}
       end
     else
       respond_to do |format|
         format.json { render json: failed_user_not_admin_json}
+        format.html
       end
     end
   end
@@ -84,6 +89,7 @@ class BandsController < ApplicationController
       rescue
         respond_to do |format|
           format.json {render json: {errors: "Band doesn't exist"}}
+          format.html {redirect_to bands_path}
         end
       end
 

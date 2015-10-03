@@ -4,31 +4,41 @@
 <div class="container">
     <% @bands.each do |band| %>
     <div class="row">
-    <div class=" col-sm-3">
+    <div class=" col-sm-2">
     </div>
-    <div class="band col-sm-4">
+    <div class="band col-sm-8">
       <div class="image">
-
+	<%= image_tag band.image %>
       </div>
       <div class="band-info">
 	<div class="band-title">
-	  <%= band.name %>
+	  <h1><%= band.name %></h1>
 	</div>
+	<hr>
 	<div class="description">
 	  <%= band.description %>
 	</div>
 	<div class="link">
-	  <%=  link_to 'Show', band %>
+	  <% if( band.concerts.length > 0) %>
+	  <%=  link_to 'Go to the band concerts!', band_concerts_path(band.id) %>
+	  <% else %>
+	   <h4>Sorry no concert for now</h4>
+	  <% end %>
+	  <% if @user != nil && @user.isAdmin? %>
+	  
+	  <%= link_to 'Open a new Concert', new_band_concert_path(band) %>
+	  
+	  
+	  
+	<%= link_to 'Remove band', band, method: :delete, data: { confirm: 'Are you sure?' } %>
+	<% end %>
+	
+
 	</div>
       </div>
     </div>
 
-      <div class=" col-sm-3">
-	<% if @user != nil && @user.isAdmin? %>
-	<%= link_to 'Edit', edit_band_path(band) %>
-	<%= link_to 'Destroy', band, method: :delete, data: { confirm: 'Are you sure?' } %>
-	<% end %>
-	
+      <div class=" col-sm-2">
       </div>
     </div>
     <% end %>

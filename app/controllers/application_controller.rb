@@ -56,4 +56,5 @@ private
  def failed_user_not_admin_json
    {status: :error, errors: "You can't access this"}
  end
+ 
 end

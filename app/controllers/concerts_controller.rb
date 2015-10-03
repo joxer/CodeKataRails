@@ -23,6 +23,8 @@ class ConcertsController < ApplicationController
 
   def new
     @concert = Concert.new
+    @band = Band.find(params[:band_id])
+
   end
 
   def edit
@@ -33,13 +35,13 @@ class ConcertsController < ApplicationController
 
     if @user != nil
       @concert = Concert.new(concert_params)
-      @concert.user = @user
+      @concert.user_id = @user.id
       @concert.band = Band.find(params[:band_id])
-      
+
       if @concert.save
         respond_to do |format|
-          format.json
-          format.html
+          format.json 
+          format.html {redirect_to band_concerts_path(@concert.band)}
         end
           
       else

@@ -4,18 +4,22 @@ one:
   id: 1
   name: Queen
   description: W Freddie!
-
+  image: image1.jpg
+  
 two:
   id: 2
   name: Beatles 
   description: Best UK band ever
-
+  image: image2.jpg
+  
 three:
   id: 3
   name: Nirvana
   description: Grunge!
+  image: image3.jpg
 
 four:
   id: 4
   name: Prodigy
   description: YEAH! PSYCHEDELIC!
+  image: image4.jpg	

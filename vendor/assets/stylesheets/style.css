@@ -1978,11 +1978,100 @@ width:200px !important;
     padding:20px;
     min-height:200px;
     margin-top:20px;
-    margin-bottom.20px;
+    margin-bottom:20px;
+    box-shadow: 0px 0px 8px #999;
 }
 
 .band div.image{
 
-    
+    float:left;
+    width:300px;
+    height:300px;
+    margin-right:20px;
+}
+
+.band .band-title{
+
+    text-shadow: 0px 0px 2px #999;
+}
+
+.band div.image img{
+
+    width:300px;
+    height:300px;
+
+    box-shadow: 0px 0px 5px  #333;
 
 }
+
+.band-info hr{
+
+    color: #888;
+    background-color: #888;
+    height:2px;
+}
+
+.band-info .link {
+
+    margin-top: 15px;
+}
+
+
+
+.band {
+
+    background-color: #ffddff;
+    padding:20px;
+    min-height:200px;
+    margin-top:20px;
+    margin-bottom:20px;
+    box-shadow: 0px 0px 8px #999;
+}
+
+.band div.image{
+
+    float:left;
+    width:300px;
+    height:300px;
+    margin-right:20px;
+}
+
+.band .band-title, .concert .concert-location{
+
+    text-shadow: 0px 0px 2px #999;
+}
+
+.concert div.image img{
+
+    width:300px;
+    height:300px;
+    float: left;
+    margin-right:20px;
+    box-shadow: 0px 0px 5px  #333;
+
+}
+
+
+.concert-info hr{
+
+    color: #888;
+    background-color: #888;
+    height:2px;
+}
+
+.concert-info .link {
+
+    margin-top: 15px;
+}
+
+
+.concert {
+    
+    background-color: #ffddff;
+    padding:20px;
+    min-height:200px;
+    margin-top:20px;
+    margin-bottom:20px;
+    box-shadow: 0px 0px 8px #999;
+}
+

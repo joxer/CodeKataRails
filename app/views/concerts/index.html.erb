@@ -1,34 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Concerts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Position</th>
-      <th>Band</th>
-      <th>Location</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="container">
     <% @concerts.each do |concert| %>
-      <tr>
-        <td><%= concert.position %></td>
-        <td><%= concert.band.name %></td>
-        <td><%= concert.location %></td>
-        <td><%= link_to 'Show', band_concert_path(:band_id => concert.band.id, :id => concert.id) %></td>
-	<% if @user != nil && (@user.isAdmin? || concert.user == @user) %>
-        <td><%= link_to 'Edit', edit_band_concert_path(:band_id => concert.band.id, :id => concert.id) %></td>
-        <td><%= link_to 'Destroy', band_concert_path(:id => concert.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-      <% end %>
-      <% end %>
-  </tbody>
-</table>
+    <div class="row">
+    <div class=" col-sm-2">
+    </div>
+    <div class="concert col-sm-8">
+      <div class="image">
+	<img src="http://staticmap.openstreetmap.de/staticmap.php?center=<%= concert.position.split(',')[0].gsub('(','') %>,<%= concert.position.split(',')[1].gsub(')','') %>&zoom=17&size=300x300&maptype=mapnik" />
+      </div>
+      <div class="concert-info">
+	<div class="concert-location">
+	  <% if params[:band_id] == "0" %>
+	  <h1><%= concert.band.name %> | <%= concert.location %></h1>
+	  <% else %>
+	  <h1><%= concert.location %></h1>
+	  <% end %>
+	</div>
+	<hr>
+	<div class="description">
+	  Go to this concert! It will be fantastic!
+	</div>
+	<div class="link">
+	  
+	</div>
+      </div>
+    </div>
+    
+    <div class=" col-sm-2">
+    </div>
+    </div>
+    <% end %>
+</div>
 
-<br>
-<% if @user != nil && (@user.isAdmin? || concert.user == @user) %>
-<%= link_to 'New Concert', new_band_concert_path %>
-<% end %>
+
