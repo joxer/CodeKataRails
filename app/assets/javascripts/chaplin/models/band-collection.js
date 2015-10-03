@@ -1,4 +1,4 @@
-define([
+/*define([
   'chaplin',
     'models/base/collection',
     'models/band'
@@ -26,3 +26,4 @@ define([
 
   return Bands;
 });
+*/
